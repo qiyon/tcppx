@@ -47,7 +47,7 @@ func main() {
 			continue
 		}
 		timeStr := time.Now().Format("2006-01-02 15:04:05")
-		fmt.Printf("[%s] Accet connection from: %s\n", timeStr, conn.RemoteAddr().String())
+		fmt.Printf("[%s] Connection from: %s\n", timeStr, conn.RemoteAddr().String())
 		px := servive.NewProxy(conn, localAddr, remoteAddr)
 		go px.Run()
 	}
