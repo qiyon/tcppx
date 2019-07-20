@@ -6,11 +6,12 @@ import (
 	"net"
 	"os"
 	"tcppx/servive"
+	"time"
 )
 
 var (
-	local  = flag.String("l", "", "Local Address, example: 0.0.0.0:9999")
-	remote = flag.String("r", "", "Remote Address, example: 127.0.0.1:9998")
+	local  = flag.String("l", "", "Local Address, example: 0.0.0.0:18888")
+	remote = flag.String("r", "", "Remote Address, example: 127.0.0.1:18889")
 )
 
 func main() {
@@ -45,7 +46,8 @@ func main() {
 			fmt.Println("Accept connection err: ", err.Error())
 			continue
 		}
-		fmt.Println("Accept connection from: ", conn.RemoteAddr().String())
+		timeStr := time.Now().Format("2006-01-02 15:04:05")
+		fmt.Printf("[%s] Accet connection from: %s\n", timeStr, conn.RemoteAddr().String())
 		px := servive.NewProxy(conn, localAddr, remoteAddr)
 		go px.Run()
 	}
