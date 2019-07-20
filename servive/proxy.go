@@ -49,7 +49,7 @@ func (p *Proxy) closeConn(msg string, err error) {
 	p.connClosed = true
 }
 
-func (p *Proxy) pipe(src io.ReadWriter, dst io.ReadWriter) {
+func (p *Proxy) pipe(src, dst io.ReadWriter) {
 	//64k
 	buff := make([]byte, 0xffff)
 	for {
@@ -59,7 +59,6 @@ func (p *Proxy) pipe(src io.ReadWriter, dst io.ReadWriter) {
 			return
 		}
 		b := buff[:n]
-		//write out result
 		n, err = dst.Write(b)
 		if err != nil {
 			p.closeConn("Write conn err: ", err)
