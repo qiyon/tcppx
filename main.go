@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net"
 	"os"
-	"tcppx/servive"
+	"tcppx/service"
 	"time"
 )
 
@@ -48,7 +48,7 @@ func main() {
 		}
 		timeStr := time.Now().Format("2006-01-02 15:04:05")
 		fmt.Printf("[%s] Connection from: %s\n", timeStr, conn.RemoteAddr().String())
-		px := servive.NewProxy(conn, localAddr, remoteAddr)
+		px := service.NewProxy(conn, localAddr, remoteAddr)
 		go px.Run()
 	}
 }

@@ -1,4 +1,4 @@
-package servive
+package service
 
 import (
 	"fmt"
